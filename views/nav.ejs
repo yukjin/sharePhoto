@@ -1,0 +1,19 @@
+<div class="blog-masthead">
+    <div class="container">
+        <nav class="blog-nav">
+            <% if(locals['user']){%>
+
+            <img class="blog-nav-item navbar-right" src="<%=user.portrait_url%>" style="height: 40px;width: 40px" class="img-rounded"/>
+            <a class="blog-nav-item navbar-right" href="/logout">登出</a>
+            <a class="blog-nav-item" href="/home">主页</a>
+            <%}else{%>
+
+            <a class="blog-nav-item navbar-right" href="/register">注册</a>
+            <a class="blog-nav-item navbar-right" href="/login">登入</a>
+            <%}%>
+            <a class="blog-nav-item" href="/uploadPhoto">上传图片</a>
+            <a class="blog-nav-item" href="/new">最新</a>
+
+        </nav>
+    </div>
+</div>

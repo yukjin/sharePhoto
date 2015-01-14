@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/blog.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/signin.css" rel="stylesheet">
+    <link href="/css/uploadify.css" rel="stylesheet">
+
+</head>
+
+<body>
+<%= include nav%>
+<div class="container"><br/><br/><br/></div>
+<div class="container">
+    <div class="alert alert-danger" role='alert' style="display: none" id="errTip">
+
+    </div>
+    <form class="form-signin" action="/infoSettings" method="post">
+        <div class="input-group" style="margin-left:auto;margin-right:auto; " >
+            <img src="" style="height: 300px;width: 300px;" class="img-thumbnail" id="newPhoto"/>
+        </div>
+        <div class="input-group" style="margin-left:auto;margin-right:auto; " >
+            <input class="form-control" type="file" name="headImg" id="photoFile">
+        </div>
+        <input type="text" class="form-control" placeholder="图片描述" id="desId">
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="subBtn">提交</button>
+    </form>
+</div> <!-- /container -->
+
+
+
+</body>
+<script src="/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.uploadify.min.js"></script>
+<script>
+
+    $(function () {
+        $('#photoFile').uploadify({
+            'fileSizeLimit' : '300KB',
+            'buttonText' : '选择图片',
+            'swf'      : 'uploadify.swf',
+            'uploader' : '/uploadPhoto',
+            'fileTypeExts' : '*.jpg; *.png',
+            'onUploadSuccess' : function(file, data, response) {
+                $('#newPhoto').attr('src',data);
+            }
+        });
+
+        $('#subBtn').click(function () {
+            var imgUrl=$('#newPhoto').attr('src');
+            var description=$('#desId').val();
+            $.ajax({
+                "url":"/addPhoto",
+                "type":"post",
+                "data":{'url':imgUrl,'description':description},
+                "dataType":"json",
+                "success": function (data) {
+                    if(data.success){
+                        window.location.href="/";
+                    }else if(data.error){
+                        $('#errTip').text(data.error);
+                        $('#errTip').css('display','block');
+                    }
+                },
+                "error": function (data) {
+                    alert(JSON.stringify(data))
+                }
+            });
+        });
+    })
+
+</script>
+
+</html>

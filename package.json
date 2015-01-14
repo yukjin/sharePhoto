@@ -1,0 +1,23 @@
+{
+  "name": "SharePhoto",
+  "version": "1.0.0",
+  "description": "a website for sharing photo",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yukjin",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.10.1",
+    "connect-busboy": "0.0.2",
+    "connect-flash": "^0.1.1",
+    "ejs": "^2.1.4",
+    "eventproxy": "^0.3.2",
+    "express": "^4.10.7",
+    "express-session": "^1.10.1",
+    "moment": "^2.9.0",
+    "mysql": "^2.5.4",
+    "qn": "^1.0.1"
+  }
+}
